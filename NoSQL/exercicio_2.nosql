@@ -1,0 +1,13 @@
+// Mesmas buscas do exercício 1, retornando só a quantidade de resultados
+
+// 1) Não publicados e com menos de 300 páginas
+db.books.countDocuments({ status: { $ne: "PUBLISH" }, pageCount: { $lt: 300 } })
+
+// 2) MongoDB ou SQL Server no título
+db.books.countDocuments({ $or: [ { title: /MongoDB/ }, { title: /SQL Server/ } ] })
+
+// 3) ISBN começando com 18
+db.books.countDocuments({ isbn: /^18/ })
+
+// 4) Java ou Mobile na descrição longa
+db.books.countDocuments({ longDescription: /java|mobile/i })

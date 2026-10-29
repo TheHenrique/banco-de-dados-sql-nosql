@@ -1,0 +1,25 @@
+// Banco: books.json importado na coleção "books" (MongoDB)
+
+// 1) Livros que não estão publicados e têm menos de 300 páginas
+db.books.find(
+  { status: { $ne: "PUBLISH" }, pageCount: { $lt: 300 } },
+  { _id: 0, title: 1, status: 1, pageCount: 1 }
+)
+
+// 2) Livros com MongoDB ou SQL Server no título
+db.books.find(
+  { $or: [ { title: /MongoDB/ }, { title: /SQL Server/ } ] },
+  { _id: 0, title: 1 }
+)
+
+// 3) Livros com ISBN começando com 18 (expressão regular)
+db.books.find(
+  { isbn: /^18/ },
+  { _id: 0, title: 1, isbn: 1 }
+)
+
+// 4) Livros com Java ou Mobile na descrição longa, sem diferenciar maiúsculas e minúsculas
+db.books.find(
+  { longDescription: /java|mobile/i },
+  { _id: 0, title: 1 }
+)
